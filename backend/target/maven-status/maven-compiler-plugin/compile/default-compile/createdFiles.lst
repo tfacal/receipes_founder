@@ -1,0 +1,12 @@
+receipes_founder/backend/model/services/Block.class
+receipes_founder/backend/rest/controllers/SolrController.class
+receipes_founder/backend/model/exceptions/CamposIntroducidosNoValidosException.class
+receipes_founder/backend/rest/dtos/ErrorCampoDto.class
+receipes_founder/backend/model/exceptions/InstanceException.class
+receipes_founder/backend/model/entities/Receipes.class
+receipes_founder/backend/rest/dtos/ErroresDto.class
+receipes_founder/backend/rest/controllers/ReceipesQueryParams.class
+receipes_founder/receipesFounderApp.class
+receipes_founder/backend/model/exceptions/CampoDuplicadoException.class
+receipes_founder/backend/model/exceptions/InstanceNotFoundException.class
+receipes_founder/backend/model/entities/RespuestaSolr.class
