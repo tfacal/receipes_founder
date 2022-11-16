@@ -1,0 +1,13 @@
+target/
+
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+
+# VS Code
+.vscode/
+
+# Ignora archivos del sistema Mac 
+.DS_store
