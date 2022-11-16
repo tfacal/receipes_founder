@@ -1,7 +1,7 @@
+target/
+
 # Ignora archivos del sistema Mac 
 .DS_store
 
 # Ignora archivos .pyc 
 *.pyc
-
-
