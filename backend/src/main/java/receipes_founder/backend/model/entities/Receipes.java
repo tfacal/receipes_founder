@@ -1,17 +1,19 @@
 package receipes_founder.backend.model.entities;
 
+import java.util.ArrayList;
+
 import org.apache.solr.client.solrj.beans.Field;
 
 public class Receipes {
 
     @Field public String nombre;
-    @Field public String ingredientes;
+    @Field public ArrayList ingredientes;
     @Field public String comensales;
     @Field public String duracion;
     @Field public String para;
     @Field public String dificultad;
 
-    public Receipes(String nombre, String ingredientes, String comensales, String duracion, String para, String dificultad) {
+    public Receipes(String nombre, ArrayList ingredientes, String comensales, String duracion, String para, String dificultad) {
         this.nombre = nombre;
         this.ingredientes = ingredientes;
         this.comensales = comensales;

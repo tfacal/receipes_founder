@@ -20,42 +20,40 @@ import java.util.List;
 @RequestMapping("/receipes_founder")
 public class SolrController {
 
-    private final String SOLR_URL = "http://localhost:8983/solr/receipesData";
+	private final String SOLR_URL = "http://localhost:8983/solr/recetasData";
 
-    private HttpSolrClient getSolrClient(){
-        return new HttpSolrClient.Builder(SOLR_URL)
-                .withConnectionTimeout(10000)
-                .withSocketTimeout(60000)
-                .build();
-    }
+	private HttpSolrClient getSolrClient() {
+		return new HttpSolrClient.Builder(SOLR_URL).withConnectionTimeout(10000).withSocketTimeout(60000).build();
+	}
 
-    @PostMapping("/receipes")
-    private RespuestaSolr obtenerRecetas(@RequestBody ReceipesQueryParams queryParams)
-            throws SolrServerException, IOException, ParseException {
-        final SolrClient client = getSolrClient();
+	@PostMapping("/receipes")
+	private RespuestaSolr obtenerRecetas(@RequestBody ReceipesQueryParams queryParams)
+			throws SolrServerException, IOException, ParseException {
+		final SolrClient client = getSolrClient();
 
-        final String queryStr =
-                        "nombre:\"" + queryParams.getName() + "\" && " +
-                        "comensales:\"" + queryParams.getComensales() + "\" && " +
-                        "dificultad:" + queryParams.getDificultad() + " && " +
-                        "duracion:\"" + queryParams.getDuracion() + "\" && " +
-                        "ingredientes:\"" + queryParams.getIngredientes() + "\" && " +
-                        "para:" + queryParams.getPara();
-        final SolrQuery query = new SolrQuery(queryStr);
+		SolrQuery parameters = new SolrQuery();
 
-        // Ordenar por duracion
-        query.setSort("duracion", SolrQuery.ORDER.desc);
+		parameters.setQuery("nombre:" + queryParams.getNombre() + " && " + "duracion:" + queryParams.getDuracion()
+				+ " && " + "comensales:" + queryParams.getComensales() + " && " + "para:" + queryParams.getPara() + " && "
+				+ "dificultad:" + queryParams.getDificultad());
 
-        // Paginacion
-        query.setStart((queryParams.getPage() - 1) * queryParams.getSize());
-        query.setRows(queryParams.getSize());
+		parameters.setFields("nombre", "duracion", "comensales", "dificultad", "duracion", "para", "ingredientes");
+		
+		QueryResponse response = null;
+		
+		// Ordenar por duracion
+		parameters.setSort("duracion", SolrQuery.ORDER.desc);
 
-        final QueryResponse response = client.query(query);
-        final List<Receipes> resultadoBusqueda = response.getBeans(Receipes.class);
+		// Paginacion
+		parameters.setStart((queryParams.getPagina() - 1) * queryParams.getTamaño());
+		parameters.setRows(queryParams.getTamaño());
+		
+		response = client.query(parameters);
+		final List<Receipes> resultadoBusqueda = response.getBeans(Receipes.class);
 
-        RespuestaSolr resultado = new RespuestaSolr();
-        resultado.setResultadoBusqueda(resultadoBusqueda);
+		RespuestaSolr resultado = new RespuestaSolr();
+		resultado.setResultadoBusqueda(resultadoBusqueda);
 
-        return resultado;
-    }
+		return resultado;
+	}
 }
