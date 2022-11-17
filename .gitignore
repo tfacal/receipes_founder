@@ -5,3 +5,7 @@ target/
 
 # Ignora archivos .pyc 
 *.pyc
+
+
+receipes_founder/__pycache__
+receipes_founder/spiders/__pycache__
