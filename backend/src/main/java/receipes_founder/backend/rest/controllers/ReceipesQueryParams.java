@@ -1,80 +1,83 @@
 package receipes_founder.backend.rest.controllers;
 
+import java.util.ArrayList;
+
 public class ReceipesQueryParams {
 
-    private String name;
-    private String comensales;
-    private String duracion;
-    private String para;
-    private String ingredientes;
-    private String dificultad;
-    private int page;
-    private int size;
+	private String nombre;
+	private String comensales;
+	private String duracion;
+	private String para;
+	private ArrayList ingredientes;
+	private String dificultad;
+	private int pagina;
+	private int tamaño;
 
-    public ReceipesQueryParams() {
-    }
+	public ReceipesQueryParams() {
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getComensales() {
-        return comensales;
-    }
+	public String getComensales() {
+		return comensales;
+	}
 
-    public void setComensales(String comensales) {
-        this.comensales = comensales;
-    }
+	public void setComensales(String comensales) {
+		this.comensales = comensales;
+	}
 
-    public String getDuracion() {
-        return duracion;
-    }
+	public String getDuracion() {
+		return duracion;
+	}
 
-    public void setDuracion(String duracion) {
-        this.duracion = duracion;
-    }
+	public void setDuracion(String duracion) {
+		this.duracion = duracion;
+	}
 
-    public String getPara() {
-        return para;
-    }
+	public String getPara() {
+		return para;
+	}
 
-    public void setPara(String para) {
-        this.para = para;
-    }
+	public void setPara(String para) {
+		this.para = para;
+	}
 
-    public String getIngredientes() {
-        return ingredientes;
-    }
+	public ArrayList getIngredientes() {
+		return ingredientes;
+	}
 
-    public void setIngredientes(String ingredientes) {
-        this.ingredientes = ingredientes;
-    }
+	public void setIngredientes(ArrayList ingredientes) {
+		this.ingredientes = ingredientes;
+	}
 
-    public String getDificultad() {
-        return dificultad;
-    }
+	public String getDificultad() {
+		return dificultad;
+	}
 
-    public void setDificultad(String dificultad) {
-        this.dificultad = dificultad;
-    }
+	public void setDificultad(String dificultad) {
+		this.dificultad = dificultad;
+	}
 
-    public int getPage() {
-        return page;
-    }
+	public int getPagina() {
+		return pagina;
+	}
 
-    public void setPage(int page) {
-        this.page = page;
-    }
+	public void setPagina(int pagina) {
+		this.pagina = pagina;
+	}
 
-    public int getSize() {
-        return size;
-    }
+	public int getTamaño() {
+		return tamaño;
+	}
 
-    public void setSize(int size) {
-        this.size = size;
-    }
+	public void setTamaño(int tamaño) {
+		this.tamaño = tamaño;
+	}
+
 }
