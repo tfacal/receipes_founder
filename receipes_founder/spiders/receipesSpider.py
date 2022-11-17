@@ -17,8 +17,9 @@ class ReceipesSpider(scrapy.Spider):
                    "duracion": link.css('div.properties span.duracion::text').extract(),
                    "para": link.css('div.properties span.para::text').extract(),
                    "dificultad": link.css('div.properties span.dificultad::text').extract(),
-                   "ingredientes": link.css('div.ingredientes li.ingrediente label::text').extract()
-                   }
+                   "ingredientes": link.css('div.ingredientes li.ingrediente label::text').extract(),
+                   "apartados": link.css('div.apartado p::text').extract()
+                   }     
 
     def parse(self, response):
         for link in response.css('div.categoria a::attr(href)').extract():
