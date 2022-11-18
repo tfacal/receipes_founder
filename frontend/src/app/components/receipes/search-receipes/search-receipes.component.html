@@ -53,12 +53,12 @@
           <mat-card class="search-receipes__results__card">
             <mat-card-header class="search-receipes__results__header" (click)="openDetails(receipe)">
               <h2 class="search-receipes__results__title">{{receipe.nombre}}</h2>
-              <span>{{receipe.duracion + ' minutos'+ ' - ' + receipe.comensales}}</span>
+              <span>{{receipe.duracion | number: '1.0'}} {{' minutos'+ ' - ' + receipe.comensales}}</span>
             </mat-card-header>
           </mat-card>
         </div>
-        <button *ngIf="receipesResult.length>0" mat-raised-button [disabled]="!existMore"
-          (click)="loadReceipes()" class="search-receipes__filters__button">Mostras más</button>
+        <button *ngIf="receipesResult.length>0" mat-raised-button (click)="loadReceipes()"
+          class="search-receipes__filters__button">Mostras más</button>
       </ng-container>
       <ng-template #noReceipes>
         <div class="search-receipes__noResults">

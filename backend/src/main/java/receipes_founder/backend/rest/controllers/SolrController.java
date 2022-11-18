@@ -45,6 +45,14 @@ public class SolrController {
 		return query;
 	}
 
+	private String getDuration(String duracion) {
+		if (!duracion.equals("*")) {
+			return String.format("%04d", Integer.parseInt(duracion));
+		} else {
+			return "*";
+		}
+	}
+
 	@PostMapping("/receipes")
 	private RespuestaSolr obtenerRecetas(@RequestBody ReceipesQueryParams queryParams)
 			throws SolrServerException, IOException, ParseException {
@@ -52,7 +60,8 @@ public class SolrController {
 
 		SolrQuery parameters = new SolrQuery();
 
-		parameters.setQuery("nombre:" + queryParams.getNombre() + " && " + "duracion:[* TO " + queryParams.getDuracion()+ "]"
+		parameters.setQuery("nombre:" + queryParams.getNombre() + " && " + "duracion:[* TO "
+				+ getDuration(queryParams.getDuracion()) + "]"
 				+ " && " + "comensales:" + queryParams.getComensales() + " && " + "para:" + queryParams.getPara()
 				+ " && " + getIngredientes(queryParams.getIngredientes().split((","))) + " && "
 				+ "dificultad:" + queryParams.getDificultad());

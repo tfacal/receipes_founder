@@ -34,7 +34,7 @@ class ReceipesSpider(scrapy.Spider):
         for link in response.css('div.header-gap'):
             yield {"nombre": link.css('article h1::text').extract(),
                    "comensales": link.css('div.properties span.comensales::text').extract(),
-                   "duracion": self.parse_duration(str(link.css('div.properties span.duracion::text').extract()[0])),
+                   "duracion": str(self.parse_duration(str(link.css('div.properties span.duracion::text').extract()[0]))).zfill(4),
                    "para": link.css('div.properties span.para::text').extract(),
                    "dificultad": link.css('div.properties span.dificultad::text').extract(),
                    "ingredientes": link.css('div.ingredientes li.ingrediente label::text').extract(),

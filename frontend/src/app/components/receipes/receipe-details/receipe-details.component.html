@@ -9,7 +9,7 @@
     </div>
     <div class="receipes-details__content__row" *ngIf="receipe.duracion">
       <mat-icon>query_builder</mat-icon>
-      <span class="receipes-details__content__data">{{receipe.duracion  + ' minutos'}}</span>
+      <span class="receipes-details__content__data">{{receipe.duracion | number: '1.0'}} {{' minutos'}}</span>
     </div>
     <div class="receipes-details__content__row" *ngIf="receipe.dificultad">
       <mat-icon>signal_cellular_alt</mat-icon>
