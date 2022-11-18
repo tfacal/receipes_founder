@@ -1,0 +1,27 @@
+.receipes-details {
+  &__card {
+    justify-content: center;
+    box-shadow: none;
+  }
+
+  &__content {
+    &__data {
+      margin-left: 0.5rem;
+    }
+
+    &__row {
+      display: flex;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+
+    &__ingredientes {
+      margin: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    &__tab {
+      align-items: center;
+    }
+  }
+}

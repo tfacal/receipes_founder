@@ -1,0 +1,41 @@
+<mat-card class="receipes-details">
+  <mat-card-header class="receipes-details__card">
+    <h3 class="receipes-details__card-title">{{receipe.nombre}}</h3>
+  </mat-card-header>
+  <mat-card-content class="receipes-details__content">
+    <div class="receipes-details__content__row" *ngIf="receipe.comensales">
+      <mat-icon>people_outline</mat-icon>
+      <span class="receipes-details__content__data">{{receipe.comensales}}</span>
+    </div>
+    <div class="receipes-details__content__row" *ngIf="receipe.duracion">
+      <mat-icon>query_builder</mat-icon>
+      <span class="receipes-details__content__data">{{receipe.duracion | number: '1.0'}} {{' minutos'}}</span>
+    </div>
+    <div class="receipes-details__content__row" *ngIf="receipe.dificultad">
+      <mat-icon>signal_cellular_alt</mat-icon>
+      <span class="receipes-details__content__data">{{receipe.dificultad}}</span>
+    </div>
+    <div class="receipes-details__content__row" *ngIf="receipe.para">
+      <mat-icon>fastfood</mat-icon>
+      <span class="receipes-details__content__data">{{receipe.para}}</span>
+    </div>
+    <mat-tab-group class="receipes-details__content__tab">
+      <mat-tab *ngIf="receipe.ingredientes">
+        <ng-template mat-tab-label>
+          <mat-icon>restaurant</mat-icon>
+          Ingredientes
+        </ng-template>
+        <div *ngFor="let ingrediente of ingredientes">
+          <mat-list role="list">{{ingrediente}}</mat-list>
+        </div>
+      </mat-tab>
+      <mat-tab *ngIf="receipe.apartados">
+        <ng-template mat-tab-label>
+          <mat-icon>room_service</mat-icon>
+          Pasos
+        </ng-template>
+        <span role="list">{{apartados}}</span>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>
