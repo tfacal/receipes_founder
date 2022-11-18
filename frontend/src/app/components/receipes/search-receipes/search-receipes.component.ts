@@ -29,6 +29,8 @@ export class SearchReceipesComponent implements OnInit {
 
   receipesResult: ReceipesResult[] = [];
 
+  selectedReceipe: ReceipesResult | any = null;
+
   receipesForm = new FormGroup({
     nombre: new FormControl(''),
     duracion: new FormControl(''),
@@ -58,6 +60,30 @@ export class SearchReceipesComponent implements OnInit {
         this.receipesResult.push(element);
       });
     });
+  }
+
+  openDetails(receipe: ReceipesResult) {
+    if (this.selectedReceipe !== receipe) {
+      this.selectedReceipe = receipe;
+    }
+    else {
+      this.selectedReceipe = null;
+    }
+  }
+
+  loadReceipes() {
+    if (this.receipe) {
+      this.receipe.pagina++;
+    }
+    this.receipesSearch.getReceipesByFilters(this.receipe).subscribe((value) => {
+      value['resultadoBusqueda'].forEach((element: ReceipesResult) => {
+        this.receipesResult.push(element);
+      });
+    });
+  }
+
+  onClose() {
+    this.selectedReceipe = null;
   }
 
 }

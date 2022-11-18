@@ -33,15 +33,21 @@
     </div>
     <button mat-raised-button (click)="searchByFilter()">Buscar</button>
   </form>
-  <div class="search-receipes__results">
-    <h1>Resultados</h1>
+  <div class="search-receipes__results" (scroll)="loadReceipes()">
+    <h1>Recetas</h1>
     <div *ngFor="let receipe of receipesResult">
       <mat-card class="search-receipes__results__card">
-        <mat-card-header class="search-receipes__results__header">
-            <h3 class="search-receipes__results__title" routerLink="/{{receipe.nombre}}">{{receipe.nombre}}</h3>
+        <mat-card-header class="search-receipes__results__header" (click)="openDetails(receipe)">
+            <h3 class="search-receipes__results__title">{{receipe.nombre}}</h3>
             <span>{{receipe.duracion + '  -  ' + receipe.comensales}}</span>
         </mat-card-header>
-    </mat-card>
+      </mat-card>
     </div>
+  </div>
+  <div *ngIf="selectedReceipe" class="search-receipes__details">
+    <div class="search-receipes__close">
+      <mat-icon (click)="onClose()">cancel_outline</mat-icon>
+    </div>
+    <app-receipe-details [receipe]="selectedReceipe"></app-receipe-details>
   </div>
 </div>

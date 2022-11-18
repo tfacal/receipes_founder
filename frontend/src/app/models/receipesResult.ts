@@ -5,6 +5,7 @@ export interface ReceipesResult {
   comensales: String;
   para: String;
   dificultad: String;
+  apartados: Array<String>;
   pagina: number;
   tamaño: number;
 }
