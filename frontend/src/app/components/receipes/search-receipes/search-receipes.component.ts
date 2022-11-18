@@ -23,6 +23,7 @@ export class SearchReceipesComponent implements OnInit {
     comensales: '*',
     para: '*',
     dificultad: '*',
+    ingredientes: '*',
     pagina:1,
     tamaño: 40
   }
@@ -50,9 +51,12 @@ export class SearchReceipesComponent implements OnInit {
   searchByFilter() {
     if(this.receipesForm.get('nombre')?.value) {this.receipe.nombre = this.receipesForm.get('nombre')?.value! } else this.receipe.nombre = '*'
     if(this.receipesForm.get('duracion')?.value) {this.receipe.duracion = this.receipesForm.get('duracion')?.value! } else this.receipe.duracion = '*'
+    if(this.receipesForm.get('ingredientes')?.value) {this.receipe.ingredientes = this.receipesForm.get('ingredientes')?.value! } else this.receipe.ingredientes = '*'
     if(this.receipesForm.get('comensales')?.value) {this.receipe.comensales = this.receipesForm.get('comensales')?.value! } else this.receipe.comensales = '*'
     if(this.receipesForm.get('tipo')?.value) {this.receipe.para = this.receipesForm.get('tipo')?.value! } else this.receipe.para = '*'
     if(this.receipesForm.get('dificultad')?.value) {this.receipe.dificultad = this.receipesForm.get('dificultad')?.value! } else this.receipe.dificultad = '*'
+
+    console.log(this.receipe);
 
     this.receipesSearch.getReceipesByFilters(this.receipe).subscribe((value) => {
       this.receipesResult = [];

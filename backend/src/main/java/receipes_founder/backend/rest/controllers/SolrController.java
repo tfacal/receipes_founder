@@ -57,7 +57,7 @@ public class SolrController {
 				+ " && " + getIngredientes(queryParams.getIngredientes().split((","))) + " && "
 				+ "dificultad:" + queryParams.getDificultad());
 
-		parameters.setFields("nombre", "duracion", "comensales", "dificultad", "duracion", "para", "ingredientes");
+		parameters.setFields("nombre", "duracion", "comensales", "dificultad", "duracion", "para", "ingredientes", "apartados");
 
 		QueryResponse response = null;
 
