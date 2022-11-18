@@ -33,7 +33,7 @@
     </div>
     <button mat-raised-button (click)="searchByFilter()">Buscar</button>
   </form>
-  <div class="search-receipes__results" (scroll)="loadReceipes()">
+  <div id="divResults" class="search-receipes__results" >
     <h1>Recetas</h1>
     <div *ngFor="let receipe of receipesResult">
       <mat-card class="search-receipes__results__card">
@@ -43,6 +43,7 @@
         </mat-card-header>
       </mat-card>
     </div>
+    <button *ngIf="receipesResult.length>0" mat-raised-button [disabled]="!existMore" (click)="loadReceipes()">Mostras más</button>
   </div>
   <div *ngIf="selectedReceipe" class="search-receipes__details">
     <div class="search-receipes__close">

@@ -24,12 +24,12 @@ export class SearchReceipesComponent implements OnInit {
     para: '*',
     dificultad: '*',
     ingredientes: '*',
-    pagina:1,
-    tamaño: 40
+    pagina: 1,
+    tamaño: 10
   }
 
   receipesResult: ReceipesResult[] = [];
-
+  existMore: boolean = true;
   selectedReceipe: ReceipesResult | any = null;
 
   receipesForm = new FormGroup({
@@ -49,14 +49,13 @@ export class SearchReceipesComponent implements OnInit {
   }
 
   searchByFilter() {
-    if(this.receipesForm.get('nombre')?.value) {this.receipe.nombre = this.receipesForm.get('nombre')?.value! } else this.receipe.nombre = '*'
-    if(this.receipesForm.get('duracion')?.value) {this.receipe.duracion = this.receipesForm.get('duracion')?.value! } else this.receipe.duracion = '*'
-    if(this.receipesForm.get('ingredientes')?.value) {this.receipe.ingredientes = this.receipesForm.get('ingredientes')?.value! } else this.receipe.ingredientes = '*'
-    if(this.receipesForm.get('comensales')?.value) {this.receipe.comensales = this.receipesForm.get('comensales')?.value! } else this.receipe.comensales = '*'
-    if(this.receipesForm.get('tipo')?.value) {this.receipe.para = this.receipesForm.get('tipo')?.value! } else this.receipe.para = '*'
-    if(this.receipesForm.get('dificultad')?.value) {this.receipe.dificultad = this.receipesForm.get('dificultad')?.value! } else this.receipe.dificultad = '*'
-
-    console.log(this.receipe);
+    this.receipe.pagina = 1;
+    if (this.receipesForm.get('nombre')?.value) { this.receipe.nombre = this.receipesForm.get('nombre')?.value! } else this.receipe.nombre = '*'
+    if (this.receipesForm.get('duracion')?.value) { this.receipe.duracion = this.receipesForm.get('duracion')?.value! } else this.receipe.duracion = '*'
+    if (this.receipesForm.get('ingredientes')?.value) { this.receipe.ingredientes = this.receipesForm.get('ingredientes')?.value! } else this.receipe.ingredientes = '*'
+    if (this.receipesForm.get('comensales')?.value) { this.receipe.comensales = this.receipesForm.get('comensales')?.value! } else this.receipe.comensales = '*'
+    if (this.receipesForm.get('tipo')?.value) { this.receipe.para = this.receipesForm.get('tipo')?.value! } else this.receipe.para = '*'
+    if (this.receipesForm.get('dificultad')?.value) { this.receipe.dificultad = this.receipesForm.get('dificultad')?.value! } else this.receipe.dificultad = '*'
 
     this.receipesSearch.getReceipesByFilters(this.receipe).subscribe((value) => {
       this.receipesResult = [];
@@ -64,6 +63,9 @@ export class SearchReceipesComponent implements OnInit {
         this.receipesResult.push(element);
       });
     });
+    var divResults = document.getElementById('divResults');
+    if (divResults != null) { divResults.scrollTop = 0; }
+    this.showMore();
   }
 
   openDetails(receipe: ReceipesResult) {
@@ -76,16 +78,21 @@ export class SearchReceipesComponent implements OnInit {
   }
 
   loadReceipes() {
-    if (this.receipe) {
-      this.receipe.pagina++;
-    }
     this.receipesSearch.getReceipesByFilters(this.receipe).subscribe((value) => {
       value['resultadoBusqueda'].forEach((element: ReceipesResult) => {
         this.receipesResult.push(element);
       });
     });
+    this.showMore();
   }
-
+  showMore() {
+    if (this.receipe) {
+      this.receipe.pagina++;
+    }
+    this.receipesSearch.getReceipesByFilters(this.receipe).subscribe((value) => {
+      if (value['resultadoBusqueda'].length == 0) { this.existMore = false; }
+    });
+  }
   onClose() {
     this.selectedReceipe = null;
   }
