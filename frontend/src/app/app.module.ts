@@ -20,8 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     MaterialSharedModule,
     ReceipesModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

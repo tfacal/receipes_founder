@@ -7,6 +7,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   imports: [
@@ -16,7 +20,11 @@ import {MatIconModule} from '@angular/material/icon';
     MatSelectModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule,
+    MatTabsModule,
+    MatRadioModule,
+
   ],
   exports: [
     MatToolbarModule,
@@ -25,7 +33,11 @@ import {MatIconModule} from '@angular/material/icon';
     MatSelectModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule,
+    MatTabsModule,
+    MatTooltipModule,
+    MatRadioModule
   ],
 })
 export class MaterialSharedModule { }

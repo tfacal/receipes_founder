@@ -4,6 +4,7 @@ export interface Receipes {
   comensales: String;
   para: String;
   dificultad: String;
+  ingredientes: String;
   pagina: number;
   tamaño: number;
 }
