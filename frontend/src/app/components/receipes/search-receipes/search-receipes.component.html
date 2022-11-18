@@ -8,8 +8,8 @@
     </div>
     <div class="search-receipes__filters__inputs">
       <mat-label>Duracion</mat-label>
-      <input class="search-receipes__filters__input" matInput
-        placeholder="Ej: 30m" formControlName="duracion">
+      <input class="search-receipes__filters__input" matInput type="number"
+        placeholder="Ej: 30" formControlName="duracion">
     </div>
     <div class="search-receipes__filters__inputs">
       <mat-label>Comensales</mat-label>
@@ -19,34 +19,56 @@
     <div class="search-receipes__filters__inputs">
       <mat-label>Ingredientes</mat-label>
       <input class="search-receipes__filters__input" matInput
-        placeholder="Ej: Pollo" formControlName="ingredientes">
+        placeholder="Ej: pollo,arroz,leche" formControlName="ingredientes">
     </div>
     <div class="search-receipes__filters__inputs">
       <mat-label>Tipo</mat-label>
-      <input class="search-receipes__filters__input" matInput
-        placeholder="Ej: Plato principal" formControlName="tipo">
+      <mat-select class="search-receipes__filters__select" formControlName="tipo">
+        <mat-option *ngFor="let type of typeOfMeals" [value]="type">
+          {{type}}
+        </mat-option>
+      </mat-select>
     </div>
     <div class="search-receipes__filters__inputs">
       <mat-label>Dificultad</mat-label>
-      <input class="search-receipes__filters__input" matInput
-        placeholder="Ej: Dificultad baja" formControlName="dificultad">
+      <mat-select class="search-receipes__filters__select" formControlName="dificultad">
+        <mat-option *ngFor="let dificulty of dificulties" [value]="dificulty">
+          {{dificulty}}
+        </mat-option>
+      </mat-select>
     </div>
-    <button mat-raised-button (click)="searchByFilter()">Buscar</button>
+    <button mat-raised-button  class="search-receipes__filters__button" (click)="searchByFilter()">Buscar</button>
   </form>
-  <div class="search-receipes__results" (scroll)="loadReceipes()">
-    <h1>Recetas</h1>
-    <div *ngFor="let receipe of receipesResult">
-      <mat-card class="search-receipes__results__card">
-        <mat-card-header class="search-receipes__results__header" (click)="openDetails(receipe)">
-            <h3 class="search-receipes__results__title">{{receipe.nombre}}</h3>
-            <span>{{receipe.duracion + '  -  ' + receipe.comensales}}</span>
-        </mat-card-header>
-      </mat-card>
-    </div>
+  <div class="search-receipes__results">
+    <ng-container *ngIf="receipesResult === null; else receipesNotNull">
+      <div class="search-receipes__noResults">
+        <img class="search-receipes__noResults__img" src="../../../assets/logo.jpeg">
+        <h1>¡Bienvenido a RecipesFounder! Inicie la búsqueda.</h1>
+      </div>
+    </ng-container>
+    <ng-template #receipesNotNull>
+      <ng-container *ngIf="receipesResult.length > 0; else noReceipes">
+        <h1>Recetas</h1>
+        <div *ngFor="let receipe of receipesResult">
+          <mat-card class="search-receipes__results__card">
+            <mat-card-header class="search-receipes__results__header" (click)="openDetails(receipe)">
+                <h2 class="search-receipes__results__title">{{receipe.nombre}}</h2>
+                <span>{{receipe.duracion + ' minutos'+ '  -  ' + receipe.comensales}}</span>
+            </mat-card-header>
+          </mat-card>
+        </div>
+      </ng-container>
+      <ng-template #noReceipes>
+        <div class="search-receipes__noResults">
+          <mat-icon class="search-receipes__noResults__icon">sentiment_very_dissatisfied</mat-icon>
+          <h4>No se han encontrado recetas. Intentelo con otros filtros!</h4>
+        </div>
+      </ng-template>
+    </ng-template>
   </div>
   <div *ngIf="selectedReceipe" class="search-receipes__details">
     <div class="search-receipes__close">
-      <mat-icon (click)="onClose()">cancel_outline</mat-icon>
+      <mat-icon (click)="onClose()">clear</mat-icon>
     </div>
     <app-receipe-details [receipe]="selectedReceipe"></app-receipe-details>
   </div>

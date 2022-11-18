@@ -4,6 +4,7 @@ import { ReceipesService } from 'src/app/backend/receipes.service';
 import { difficulties } from 'src/app/models/dificulties';
 import { Receipes } from 'src/app/models/receipes';
 import { ReceipesResult } from 'src/app/models/receipesResult';
+import { typesOfMeals } from 'src/app/models/typesOfMeal';
 
 @Component({
   selector: 'app-search-receipes',
@@ -14,6 +15,7 @@ import { ReceipesResult } from 'src/app/models/receipesResult';
 export class SearchReceipesComponent implements OnInit {
 
   dificulties: String[] = difficulties;
+  typeOfMeals: String[] = typesOfMeals;
 
   public receipesSearch: ReceipesService;
 
@@ -25,11 +27,10 @@ export class SearchReceipesComponent implements OnInit {
     dificultad: '*',
     ingredientes: '*',
     pagina:1,
-    tamaño: 40
+    tamaño: 10
   }
 
-  receipesResult: ReceipesResult[] = [];
-
+  receipesResult: ReceipesResult[] | any = null;
   selectedReceipe: ReceipesResult | any = null;
 
   receipesForm = new FormGroup({
@@ -73,17 +74,6 @@ export class SearchReceipesComponent implements OnInit {
     else {
       this.selectedReceipe = null;
     }
-  }
-
-  loadReceipes() {
-    if (this.receipe) {
-      this.receipe.pagina++;
-    }
-    this.receipesSearch.getReceipesByFilters(this.receipe).subscribe((value) => {
-      value['resultadoBusqueda'].forEach((element: ReceipesResult) => {
-        this.receipesResult.push(element);
-      });
-    });
   }
 
   onClose() {
