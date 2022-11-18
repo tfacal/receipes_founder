@@ -51,6 +51,7 @@ export class SearchReceipesComponent implements OnInit {
   }
 
   searchByFilter() {
+    this.selectedReceipe = null;
     this.receipe.pagina = 1;
     if (this.receipesForm.get('nombre')?.value) { this.receipe.nombre = this.receipesForm.get('nombre')?.value! } else this.receipe.nombre = '*'
     if (this.receipesForm.get('duracion')?.value) { this.receipe.duracion = this.receipesForm.get('duracion')?.value! } else this.receipe.duracion = '*'
