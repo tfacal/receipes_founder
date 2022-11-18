@@ -7,6 +7,7 @@ import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/receipes_founder")
 public class SolrController {
@@ -33,7 +35,7 @@ public class SolrController {
 
 		SolrQuery parameters = new SolrQuery();
 
-		parameters.setQuery("nombre:" + queryParams.getNombre() + " && " + "duracion:" + queryParams.getDuracion()
+		parameters.setQuery("nombre:" + queryParams.getNombre() + " && " + "duracion:[* TO" + queryParams.getDuracion() + "]"
 				+ " && " + "comensales:" + queryParams.getComensales() + " && " + "para:" + queryParams.getPara() + " && "
 				+ "dificultad:" + queryParams.getDificultad());
 
