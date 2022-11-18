@@ -8,7 +8,7 @@ public class ReceipesQueryParams {
 	private String comensales;
 	private String duracion;
 	private String para;
-	private ArrayList ingredientes;
+	private String ingredientes;
 	private String dificultad;
 	private int pagina;
 	private int tamaño;
@@ -48,11 +48,11 @@ public class ReceipesQueryParams {
 		this.para = para;
 	}
 
-	public ArrayList getIngredientes() {
+	public String getIngredientes() {
 		return ingredientes;
 	}
 
-	public void setIngredientes(ArrayList ingredientes) {
+	public void setIngredientes(String ingredientes) {
 		this.ingredientes = ingredientes;
 	}
 

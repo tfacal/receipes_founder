@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -22,10 +23,26 @@ import java.util.List;
 @RequestMapping("/receipes_founder")
 public class SolrController {
 
-	private final String SOLR_URL = "http://localhost:8983/solr/recetasData";
+	private final String SOLR_URL = "http://localhost:8983/solr/receipesData";
 
 	private HttpSolrClient getSolrClient() {
 		return new HttpSolrClient.Builder(SOLR_URL).withConnectionTimeout(10000).withSocketTimeout(60000).build();
+	}
+
+	private final String getIngredientes(String[] ingredientes) {
+		String query = "";
+		if (ingredientes.length > 0) {
+			for (int i = 0; i < ingredientes.length; i++) {
+				if (i == (ingredientes.length - 1)) {
+					query += "ingredientes:" + ingredientes[i];
+				} else {
+					query += "ingredientes:" + ingredientes[i] + " && ";
+				}
+			}
+		} else {
+			query = "*";
+		}
+		return query;
 	}
 
 	@PostMapping("/receipes")
@@ -35,21 +52,22 @@ public class SolrController {
 
 		SolrQuery parameters = new SolrQuery();
 
-		parameters.setQuery("nombre:" + queryParams.getNombre() + " && " + "duracion:[* TO" + queryParams.getDuracion() + "]"
-				+ " && " + "comensales:" + queryParams.getComensales() + " && " + "para:" + queryParams.getPara() + " && "
+		parameters.setQuery("nombre:" + queryParams.getNombre() + " && " + "duracion:[10 TO " + 15 + "]"
+				+ " && " + "comensales:" + queryParams.getComensales() + " && " + "para:" + queryParams.getPara()
+				+ " && " + getIngredientes(queryParams.getIngredientes().split((","))) + " && "
 				+ "dificultad:" + queryParams.getDificultad());
 
 		parameters.setFields("nombre", "duracion", "comensales", "dificultad", "duracion", "para", "ingredientes");
-		
+
 		QueryResponse response = null;
-		
+
 		// Ordenar por duracion
-		parameters.setSort("duracion", SolrQuery.ORDER.desc);
+		parameters.setSort("nombre", SolrQuery.ORDER.asc);
 
 		// Paginacion
 		parameters.setStart((queryParams.getPagina() - 1) * queryParams.getTamaño());
 		parameters.setRows(queryParams.getTamaño());
-		
+
 		response = client.query(parameters);
 		final List<Receipes> resultadoBusqueda = response.getBeans(Receipes.class);
 
@@ -58,4 +76,5 @@ public class SolrController {
 
 		return resultado;
 	}
+
 }

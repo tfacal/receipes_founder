@@ -24,7 +24,7 @@ export class SearchReceipesComponent implements OnInit {
     para: '*',
     dificultad: '*',
     pagina:1,
-    tamaño: 10
+    tamaño: 40
   }
 
   receipesResult: ReceipesResult[] = [];
