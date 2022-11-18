@@ -38,7 +38,7 @@ class ReceipesSpider(scrapy.Spider):
                    "para": link.css('div.properties span.para::text').extract(),
                    "dificultad": link.css('div.properties span.dificultad::text').extract(),
                    "ingredientes": link.css('div.ingredientes li.ingrediente label::text').extract(),
-                   "apartados": link.css('div.apartado p::text').extract()
+                   "apartados": link.css('div.apartado').css('p').css('*::text').getall()
                    } 
             print(str(link.css('div.properties span.duracion::text').extract()[0]).strip())    
 
