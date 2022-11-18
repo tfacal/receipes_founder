@@ -4,13 +4,15 @@ from collections import defaultdict
 import re
 
 class ReceipesSpider(scrapy.Spider):
-    name = 'receipes'
-    allowed_domains = ['http://recetasgratis.net/', 'recetasgratis.net']
-    start_urls = ['http://recetasgratis.net/', ]
+    name = 'receipes' # Nombre del Spider
+    allowed_domains = ['http://recetasgratis.net/', 'recetasgratis.net'] # Webs en las que se va a buscar
+    start_urls = ['http://recetasgratis.net/', ] # Url por la que se empieza a crawlear
 
     def parse_link(self, response):
         for link in response.css('div.resultado a::attr(href)').extract():
             yield scrapy.Request(link, callback=self.parse_link2)
+            
+    # Parse para convertir el string de duracion en formato 'XXh XXm' a minutos en formato 'XX'
     def parse_duration(self, s):
         d = {
             'd':      24*60,
@@ -30,6 +32,7 @@ class ReceipesSpider(scrapy.Spider):
         else:
             return 0
 
+    # Se recuperan los datos de cada receta buscando por css
     def parse_link2(self, response):
         for link in response.css('div.header-gap'):
             yield {"nombre": link.css('article h1::text').extract(),
