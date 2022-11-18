@@ -4,6 +4,7 @@ import { ReceipesService } from 'src/app/backend/receipes.service';
 import { difficulties } from 'src/app/models/dificulties';
 import { Receipes } from 'src/app/models/receipes';
 import { ReceipesResult } from 'src/app/models/receipesResult';
+import { typesOfMeals } from 'src/app/models/typesOfMeal';
 
 @Component({
   selector: 'app-search-receipes',
@@ -14,6 +15,7 @@ import { ReceipesResult } from 'src/app/models/receipesResult';
 export class SearchReceipesComponent implements OnInit {
 
   dificulties: String[] = difficulties;
+  typeOfMeals: String[] = typesOfMeals;
 
   public receipesSearch: ReceipesService;
 
@@ -28,8 +30,8 @@ export class SearchReceipesComponent implements OnInit {
     tamaño: 10
   }
 
-  receipesResult: ReceipesResult[] = [];
   existMore: boolean = true;
+  receipesResult: ReceipesResult[] | any = null;
   selectedReceipe: ReceipesResult | any = null;
 
   receipesForm = new FormGroup({
@@ -85,6 +87,7 @@ export class SearchReceipesComponent implements OnInit {
     });
     this.showMore();
   }
+
   showMore() {
     if (this.receipe) {
       this.receipe.pagina++;
@@ -93,6 +96,7 @@ export class SearchReceipesComponent implements OnInit {
       if (value['resultadoBusqueda'].length == 0) { this.existMore = false; }
     });
   }
+
   onClose() {
     this.selectedReceipe = null;
   }

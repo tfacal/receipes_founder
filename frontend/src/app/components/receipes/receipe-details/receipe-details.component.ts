@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ReceipesResult } from 'src/app/models/receipesResult';
 
 @Component({
@@ -6,27 +6,32 @@ import { ReceipesResult } from 'src/app/models/receipesResult';
   templateUrl: './receipe-details.component.html',
   styleUrls: ['./receipe-details.component.scss']
 })
-export class ReceipeDetailsComponent implements OnInit {
+export class ReceipeDetailsComponent {
 
-  @Input() receipe: ReceipesResult | any;
+  get receipe(): ReceipesResult | any {
+    return this._receipe;
+  };
 
-  selectedReceipe: ReceipesResult | any = null;
+  @Input()
+  set receipe(value: ReceipesResult | any) {
+    if (value !== this._receipe) {
+      this.ingredientes = [];
+      this.apartados = [];
+      this._receipe = value;
+      if (this._receipe) {
+        this._receipe.ingredientes.forEach((ingrediente: any) => this.ingredientes.push(ingrediente));
+        this._receipe.apartados.forEach((paso: any) => this.apartados.push(paso.replaceAll("\n", " ")));
+      }
+    }
+  }
+
+  private _receipe: ReceipesResult | any = null;
+
+  // selectedReceipe: ReceipesResult | any = null;
 
   ingredientes: any[] = [];
   apartados: any[] = [];
 
   constructor() { }
-
-  ngOnInit(): void {
-    this.selectedReceipe = this.receipe;
-    if (this.selectedReceipe !== this.receipe) {
-      this.selectedReceipe = this.receipe;
-    }
-    else {
-      this.selectedReceipe = null;
-    }
-    this.receipe.ingredientes.forEach((ingrediente: any) => this.ingredientes.push(ingrediente));
-    this.receipe.apartados.forEach((paso: any) => this.apartados.push(paso));
-  }
 
 }

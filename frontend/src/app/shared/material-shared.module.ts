@@ -9,6 +9,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatRadioModule} from '@angular/material/radio';
+
 @NgModule({
   imports: [
     MatToolbarModule,
@@ -20,6 +23,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatIconModule,
     MatListModule,
     MatTabsModule,
+    MatRadioModule,
+
   ],
   exports: [
     MatToolbarModule,
@@ -30,7 +35,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatCardModule,
     MatIconModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTooltipModule,
+    MatRadioModule
   ],
 })
 export class MaterialSharedModule { }

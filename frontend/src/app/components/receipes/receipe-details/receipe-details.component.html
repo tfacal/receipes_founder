@@ -9,15 +9,15 @@
     </div>
     <div class="receipes-details__content__row" *ngIf="receipe.duracion">
       <mat-icon>query_builder</mat-icon>
-      <span class="receipes-details__content__data">{{receipe.duracion}}</span>
+      <span class="receipes-details__content__data">{{receipe.duracion  + ' minutos'}}</span>
     </div>
     <div class="receipes-details__content__row" *ngIf="receipe.dificultad">
       <mat-icon>signal_cellular_alt</mat-icon>
       <span class="receipes-details__content__data">{{receipe.dificultad}}</span>
     </div>
-    <div class="receipes-details__content__row" *ngIf="receipe.tipo">
+    <div class="receipes-details__content__row" *ngIf="receipe.para">
       <mat-icon>fastfood</mat-icon>
-      <span class="receipes-details__content__data">{{receipe.tipo}}</span>
+      <span class="receipes-details__content__data">{{receipe.para}}</span>
     </div>
     <mat-tab-group class="receipes-details__content__tab">
       <mat-tab *ngIf="receipe.ingredientes">
