@@ -20,14 +20,13 @@ export class ReceipeDetailsComponent {
       this._receipe = value;
       if (this._receipe) {
         this._receipe.ingredientes.forEach((ingrediente: any) => this.ingredientes.push(ingrediente));
-        this._receipe.apartados.forEach((paso: any) => this.apartados.push(paso.replaceAll("\n", " ")));
+        this.apartados = this._receipe.apartados.join(' ')
       }
     }
+    console.log(this.apartados);
   }
 
   private _receipe: ReceipesResult | any = null;
-
-  // selectedReceipe: ReceipesResult | any = null;
 
   ingredientes: any[] = [];
   apartados: any[] = [];
